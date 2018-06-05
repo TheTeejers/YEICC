@@ -10,42 +10,27 @@ class App extends Component {
     }
 
     this.getIssues = this.getIssues.bind(this);
-    // this.getData = this.getData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
+    // axios.get(`https://api.github.com/repos/rails/rails/issues?q=is%3Aopen&is%3Aissue&no%3Aassignee&per_page=${this.refs.per_page_seed.value}&sort%3Acomments-desc`)
+
   getIssues() {
-    axios.get(`https://api.github.com/repos/rails/rails/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee`)
+    axios.get(`https://api.github.com/repos/rails/rails/issues?q=is%3Aopen&is%3Aissue&no%3Aassignee&per_page=${this.refs.per_page_seed.value}`)
+
     .then((response) => {
-      console.log('I SHOULD HAVE SEARCH RESULTS');
       if (response.data ==='ERROR') {
         alert('Error in fetching data from the Rails Issues API')
       } else {
+        console.log('I SHOULD HAVE SEARCH RESULTS');
         console.log(response.data)
         let newIssues = response.data
         for (var i = 0; i < newIssues.length; i++) {
           this.setState({
             info: newIssues,
-            // info:[
-            //   {
-            //     title: newIssues[i].title,
-            //     milestone: newIssues[i].milestone,
-            //     url: newIssues[i].url,
-            //     html_url: newIssues[i].html_url,
-            //     state: newIssues[i].state,
-            //     user:{
-            //       login: newIssues[i].user.login,
-            //       html_url: newIssues[i].user.html_url,
-            //       avatar_url: newIssues[i].user.avatar_url
-            //     },
-            //     comments: newIssues[i].comments
-            //   }
-            // ]
           })
         }
-        console.log(newIssues)
-
       }
     })
   }
@@ -54,24 +39,20 @@ class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.getIssues();
+    console.log(this.refs.issue_order_seed.value)
   }
 
 
 
   render() {
-    // console.log(this.state.info.length, 'in render')
-    // console.log(this.state.info, 'in render')
-    const child = this.state.info.map((issuesData, i) => {
-            // console.log(issuesData.title)
+
+    const populate = this.state.info.map((issuesData, i) => {
       return <div key={i}>
-      <p>{issuesData.title}</p>
-      <p>{issuesData.state}</p>
-      <p>{issuesData.comments}</p>
-      <p>{issuesData.user.avatar_url}</p>
-      <p>{issuesData.user.html_url}</p>
-      <p>{issuesData.user.login}</p>
-      <p>{issuesData.url}</p>
-      <p>{issuesData.html_url}</p>
+      <h3><a href={issuesData.html_url}>{issuesData.title}</a></h3>
+      <p>Created at: {issuesData.created_at}</p>
+      <p>Comments: {issuesData.comments}</p>
+      <img src={issuesData.user.avatar_url} alt='user avatar'/>
+      <p> User Submitted: <a href={issuesData.user.html_url}>{issuesData.user.login}</a></p>
       <hr/>
 
     </div>
@@ -80,11 +61,34 @@ class App extends Component {
     return (
 
       <div className="App">
-
         <form onSubmit={this.handleSubmit}>
+          <select id='issue_components' ref='issue_components_seed'>
+            <option value='All'>All</option>
+            <option value='ActionCable'>ActionCable</option>
+            <option value='ActionMailer'>ActionMailer</option>
+            <option value='ActionPack'>ActionPack</option>
+            <option value='ActionView'>ActionView</option>
+            <option value='ActiveJob'>ActiveJob</option>
+            <option value='ActiveModel'>ActiveModel</option>
+            <option value='ActiveRecord'>ActiveRecord</option>
+            <option value='ActiveStorage'>ActiveStorage</option>
+            <option value='ActiveSupport'>ActiveSupport</option>
+            <option value='Asset Pipeline'>Asset Pipeline</option>
+          </select>
+          <select id='issue_order' ref='issue_order_seed'>
+            <option value=''>Default</option>
+            <option value='+sort%3Acomments-desc'>Most Commented</option>
+            <option value='+sort%3Acomments-asc'>Least Commented</option>
+          </select>
+          <select id='per_page' ref='per_page_seed'>
+            <option value='10'>10</option>
+            <option value='25'>25</option>
+            <option value='50'>50</option>
+            <option value='100'>100</option>
+          </select>
           <button className='searchButton' onSubmit={this.handleSubmit}>Search Issues</button>
         </form>
-              <div>{child}</div>
+        <div>{populate}</div>
       </div>
 
     );
