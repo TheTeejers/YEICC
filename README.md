@@ -1,6 +1,8 @@
 I made a basic web app that calls out to the GitHub API and allows for you to
 get the open issues from the Rails repo.
 
+To run this app, run npm install followed by npm start in the terminal.
+
 I used React and JavaScript to get this challenge complete.  Interaction with
 the web app is pretty straight forward.  Select the criteria you would like
 to search for (issue labels and number of issues returned) and click on the
