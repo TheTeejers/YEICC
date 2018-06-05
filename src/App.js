@@ -24,54 +24,55 @@ class App extends Component {
           ]
     }
 
-    this.getIssues = this.getIssues.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.getIssues = this.getIssues.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getIssues() {
-    axios.get(`https://api.github.com/repos/rails/rails/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee`)
-    .then((response) => {
-      console.log('I SHOULD HAVE SEARCH RESULTS');
-      if (response.data ==='ERROR') {
-        alert('Error in fetching data from the Rails Issues API')
-      } else {
-        console.log(response.data)
-        let newIssues = response.data
-        for (var i = 0; i < newIssues.length; i++) {
-          this.setState({
-            info:[
-              {
-                title: newIssues[i].title,
-                milestone: newIssues[i].milestone,
-                url: newIssues[i].url,
-                html_url: newIssues[i].html_url,
-                state: newIssues[i].state,
-                user:{
-                  login: newIssues[i].user.login,
-                  html_url: newIssues[i].user.html_url,
-                  avatar_url: newIssues[i].user.avatar_url
-                },
-                comments: newIssues[i].comments
-              }
-            ]
-          })
-        }
-        // console.log(this.state)
-        console.log(response.data)
-      }
-    })
-  }
+  // getIssues() {
+  //   axios.get(`https://api.github.com/repos/rails/rails/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee`)
+  //   .then((response) => {
+  //     console.log('I SHOULD HAVE SEARCH RESULTS');
+  //     if (response.data ==='ERROR') {
+  //       alert('Error in fetching data from the Rails Issues API')
+  //     } else {
+  //       console.log(response.data)
+  //       let newIssues = response.data
+  //       for (var i = 0; i < newIssues.length; i++) {
+  //         this.setState({
+  //           info:[
+  //             {
+  //               title: newIssues[i].title,
+  //               milestone: newIssues[i].milestone,
+  //               url: newIssues[i].url,
+  //               html_url: newIssues[i].html_url,
+  //               state: newIssues[i].state,
+  //               user:{
+  //                 login: newIssues[i].user.login,
+  //                 html_url: newIssues[i].user.html_url,
+  //                 avatar_url: newIssues[i].user.avatar_url
+  //               },
+  //               comments: newIssues[i].comments
+  //             }
+  //           ]
+  //         })
+  //       }
+  //       // console.log(this.state)
+  //       console.log(response.data)
+  //     }
+  //   })
+  // }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.getIssues();
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   this.getIssues();
+  // }
 
 
 
   render() {
-    console.log(this.state.info[0].title, 'in render')
-    // console.log(this.state.user.login, 'Hello!!!')
+    console.log(this.state.info.length, 'in render')
+    
+
     return (
 
       <div className="App">
@@ -84,9 +85,9 @@ class App extends Component {
         </div>
         )
       }
-        <form onSubmit={this.handleSubmit}>
-          <button className='searchButton' onSubmit={this.handleSubmit}>Search Issues</button>
-        </form>
+        // <form onSubmit={this.handleSubmit}>
+        //   <button className='searchButton' onSubmit={this.handleSubmit}>Search Issues</button>
+        // </form>
       </div>
     );
   }
