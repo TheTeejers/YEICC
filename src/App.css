@@ -1,28 +1,71 @@
-.App {
+body {
   text-align: center;
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 20px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+a{
+  text-decoration: none;
+  color: inherit;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+button {
+  outline:none;
+  height: 40px;
+  text-align: center;
+  width: 130px;
+  border-radius:20px;
+  box-shadow: 10px 5px 5px #9a9797;
+  border: 2px solid black;
+  letter-spacing:1px;
+  cursor: pointer;
+  margin-top: 15px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.displayArea{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
 }
 
-.App-intro {
-  font-size: large;
+.returnedData {
+  width: 75%;
+  height: 25%;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 3%;
+  box-shadow: 10px 5px 5px #9a9797;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.userImage {
+  max-width: 50px;
+  border-radius: 20px;
+}
+
+.underData {
+
+}
+
+.createdAtText .createdAtDate {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.searchBox {
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 3%;
+  box-shadow: 10px 5px 5px #9a9797;
+}
+
+.buttonNavigation {
+  margin-bottom: 30px;
 }
