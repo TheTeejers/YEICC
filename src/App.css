@@ -3,6 +3,7 @@ body {
   margin: 10px;
   border: 2px solid black;
   border-radius: 20px;
+  font-family: sans-serif;
 }
 
 a{
@@ -68,4 +69,19 @@ button {
 
 .buttonNavigation {
   margin-bottom: 30px;
+}
+
+
+@media (max-width: 600px) {
+  .yeiLogo {
+    max-width: 500px;
+  }
+}
+
+
+
+@media (max-width: 550px) {
+  .yeiLogo {
+    max-width: 300px;
+  }
 }

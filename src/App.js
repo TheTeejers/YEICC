@@ -26,7 +26,6 @@ class App extends Component {
       this.setState({
         clicks: this.state.clicks
       })
-      console.log(this.state.clicks, "page on right now1")
       if (response.data ==='ERROR') {
         alert('Error in fetching data from the Rails Issues API')
       } else {
@@ -40,12 +39,14 @@ class App extends Component {
     })
   }
 
+//Shows prior and next buttons after search has been started
   enableButtons() {
     document.getElementById('pageButtonsNext').removeAttribute('hidden');
     document.getElementById('pageButtonsPrior').removeAttribute('hidden');
 
   }
 
+//Handles the click of the search button
   handleSubmit(event) {
     this.enableButtons();
     event.preventDefault();
@@ -54,7 +55,7 @@ class App extends Component {
     console.log(this.refs.issue_components_seed.value)
   }
 
-
+//Handles the click of the next button
   onClickNext(event) {
     this.setState({
       clicks: this.state.clicks + 1
@@ -62,7 +63,7 @@ class App extends Component {
     this.getIssues();
   }
 
-
+  //Handles the click of the prior button
   onClickPrior(event) {
     console.log('STOP ADDING!')
     if (this.state.clicks > 0) {
@@ -82,11 +83,11 @@ class App extends Component {
     const populate = this.state.info.map((issuesData, i) => {
       return <div className='displayArea' key={i}>
         <div className='returnedData' key={i}>
-          <h2><a className='title' href={issuesData.html_url}>{issuesData.title}</a></h2>
+          <h2><a target='_blank' className='title' href={issuesData.html_url} >{issuesData.title}</a></h2>
           <p className='underData createdAtText'>Created at:</p>
           <p className='underData createdAtDate'>{issuesData.created_at}</p>
           <p className='underData'>Number of Comments: {issuesData.comments}</p>
-          <p className='underData'> User Submitted: <a href={issuesData.user.html_url}><img className='underData userImage' src={issuesData.user.avatar_url} alt='user avatar'/>{issuesData.user.login}</a></p>
+          <p className='underData'> User Submitted: <a target='_blank' href={issuesData.user.html_url} ><img className='underData userImage' src={issuesData.user.avatar_url} alt='user avatar'/>{issuesData.user.login}</a></p>
         </div>
       </div>
     })
